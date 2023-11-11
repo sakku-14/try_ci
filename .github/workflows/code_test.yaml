@@ -1,9 +1,9 @@
 name: Check and test the source code
 on:
-  # mainブランチへのプルリクが更新(プルリク作成・プッシュ)時に走る
+  # developブランチへのプルリクが更新(プルリク作成・プッシュ)時に走る
   pull_request:
     branches:
-      - main
+      - develop
 jobs:
   # DartAnalysisで静的解析
   analysis_code:
