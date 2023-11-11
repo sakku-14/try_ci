@@ -38,7 +38,6 @@ jobs:
             pubspec-
       # Flutterの各パッケージをインストール
       - name: Install packages
-        if: steps.cache-pubspec.outputs.cache-hit != 'true'
         run: flutter pub get
       # DartAnalysisで静的解析
       - name: Linter
@@ -73,7 +72,6 @@ jobs:
             pubspec-
       # Flutterの各パッケージをインストール
       - name: Install packages
-        if: steps.cache-pubspec.outputs.cache-hit != 'true'
         run: flutter pub get
       # テスト実行
       - name: Test
