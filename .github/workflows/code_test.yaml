@@ -1,37 +1,49 @@
 name: Check and test the source code
 on:
+  # mainブランチへのプルリクが更新(プルリク作成・プッシュ)時に走る
   pull_request:
     branches:
       - main
 jobs:
+  # DartAnalysisで静的解析
   analysis_code:
     name: Check the source code
     runs-on: ubuntu-latest
     steps:
+      # ブランチをクローンし、チェックアウトする
       - name: Checkout
         uses: actions/checkout@v3
+      # Flutterの環境構築
       - name: Create Flutter Environment
         uses: subosito/flutter-action@v2.11.0
         with:
           flutter-version: '3.13.5'
+      # Flutterの各パッケージをインストール
       - name: Install packages
         run: flutter pub get
+      # DartAnalysisで静的解析
       - name: Linter
         run: flutter analyze
+  # 単体テスト
   test_code:
     name: Test the source code
     runs-on: ubuntu-latest
     steps:
+      # ブランチをクローンし、チェックアウトする
       - name: Checkout
         uses: actions/checkout@v3
+      # Flutterの環境構築
       - name: Create Flutter Environment
         uses: subosito/flutter-action@v2.11.0
         with:
           flutter-version: '3.13.5'
+      # Flutterの各パッケージをインストール
       - name: Install packages
         run: flutter pub get
+      # テスト実行
       - name: Test
         run: flutter test --coverage
+      # Codecovへテスト結果をアップロード
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
         env:
