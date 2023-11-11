@@ -44,7 +44,6 @@ class _MyHomePageState extends State<MyHomePage> {
     if (kDebugMode) {
       print('hello');
     }
-    print('hello');
 
     return Scaffold(
       appBar: AppBar(
