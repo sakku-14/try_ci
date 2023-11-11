@@ -23,6 +23,7 @@ jobs:
           flutter-version: ${{env.flutter_version}}
           channel: 'stable'
           cache: true
+          cache-key: ${{runner.os}}-flutter-sdk-v${{env.flutter_version}}
       # pubspec依存パッケージのキャッシュ設定（取得・保存）
       - name: Cache pubspec
         id: cache-pubspec
@@ -57,6 +58,7 @@ jobs:
           flutter-version: ${{env.flutter_version}}
           channel: 'stable'
           cache: true
+          cache-key: ${{runner.os}}-flutter-sdk-v${{env.flutter_version}}
       # pubspec依存パッケージのキャッシュ設定（取得・保存）
       - name: Cache pubspec
         id: cache-pubspec
