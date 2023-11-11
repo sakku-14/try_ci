@@ -4,6 +4,10 @@ on:
   pull_request:
     branches:
       - develop
+# 同じブランチで新しいJobが来たら、今実行中のJobをキャンセルする
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
 env:
   # 使用しているFlutter SDKのバージョン
   flutter_version: 3.13.5
