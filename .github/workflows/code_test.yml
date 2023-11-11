@@ -13,11 +13,13 @@ jobs:
       # ブランチをクローンし、チェックアウトする
       - name: Checkout
         uses: actions/checkout@v3
-      # Flutterの環境構築
+      # Flutterの環境構築(cacheが存在すればそれを使用する)
       - name: Create Flutter Environment
         uses: subosito/flutter-action@v2.11.0
         with:
           flutter-version: '3.13.5'
+          channel: 'stable'
+          cache: true
       # Flutterの各パッケージをインストール
       - name: Install packages
         run: flutter pub get
@@ -32,11 +34,13 @@ jobs:
       # ブランチをクローンし、チェックアウトする
       - name: Checkout
         uses: actions/checkout@v3
-      # Flutterの環境構築
+      # Flutterの環境構築(cacheが存在すればそれを使用する)
       - name: Create Flutter Environment
         uses: subosito/flutter-action@v2.11.0
         with:
           flutter-version: '3.13.5'
+          channel: 'stable'
+          cache: true
       # Flutterの各パッケージをインストール
       - name: Install packages
         run: flutter pub get
@@ -48,4 +52,3 @@ jobs:
         uses: codecov/codecov-action@v3
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-          
