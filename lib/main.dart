@@ -45,7 +45,6 @@ class _MyHomePageState extends State<MyHomePage> {
       print('hello');
     }
 
-    final String y1 = 1;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
