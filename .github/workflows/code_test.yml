@@ -16,6 +16,9 @@ jobs:
   analysis_code:
     name: Check the source code
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write # プルリクへコメントを書き込めるよう権限付与
     steps:
       # ブランチをクローンし、チェックアウトする
       - name: Checkout
