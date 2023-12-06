@@ -22,10 +22,11 @@ jobs:
 
       - run: flutter doctor -v
 
-#時間かかりすぎるので、コメントアウト
+#時間かかりすぎるのでコメント
 #      - run: flutter doctor --android-licenses
 
-      - run: java --version
+#失敗するのでコメント
+#      - run: java --version
 
       - run: flutter --scan build apk
 
