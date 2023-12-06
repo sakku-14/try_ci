@@ -28,7 +28,7 @@ jobs:
 #失敗するのでコメント
 #      - run: java --version
 
-      - run: flutter --scan build apk
+      - run: flutter build apk -v
 
       - name: Install dependencies
         run: flutter pub get
