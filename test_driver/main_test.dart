@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:integration_test/integration_test_driver.dart';
 
 Future<void> main() async {
@@ -22,6 +23,8 @@ Future<void> main() async {
       },
     );
   } catch (e) {
-    print('onScreenshot - error - $e');
+    if (kDebugMode) {
+      print('onScreenshot - error - $e');
+    }
   }
 }

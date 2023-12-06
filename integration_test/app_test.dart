@@ -1,9 +1,9 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
-
-import '../lib/main.dart' as app;
+import 'package:try_ci/main.dart' as app;
 
 void main() {
   final binding = IntegrationTestWidgetsFlutterBinding();
@@ -40,7 +40,9 @@ takeScreenshot(tester, binding, name) async {
     try {
       await binding.convertFlutterSurfaceToImage();
     } catch (e) {
-      print("TakeScreenshot exception $e");
+      if (kDebugMode) {
+        print("TakeScreenshot exception $e");
+      }
     }
     await tester.pumpAndSettle();
   }
