@@ -20,6 +20,12 @@ jobs:
           cache-key: flutter_environment-${{ runner.os }}-${{ env.flutter_version }}
           channel: 'stable'
 
+      # javaのバージョンを１１に更新
+      - uses: actions/setup-java@v4
+        with:
+#          distribution: 'zulu' # See 'Supported distributions' for available options
+          java-version: '11'
+
       - run: flutter doctor -v
 
 #時間かかりすぎるのでコメント
