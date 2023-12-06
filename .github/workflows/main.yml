@@ -1,6 +1,9 @@
 name: Flutter Workflow
 
 on: [push, workflow_dispatch]
+env:
+  # 使用しているFlutter SDKのバージョン
+  flutter_version: 3.13.5
 jobs:
   build:
     runs-on: macos-latest
@@ -8,11 +11,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Install Flutter
-        uses: subosito/flutter-action@v2
+      # Flutterの環境構築(cacheが存在すればそれを使用する)
+      - name: Create Flutter Environment
+        uses: subosito/flutter-action@v2.11.0
         with:
-          flutter-version: '3.13.5'
+          flutter-version: ${{ env.flutter_version }}
+          cache: true
+          cache-key: flutter_environment-${{ runner.os }}-${{ env.flutter_version }}
           channel: 'stable'
+
+      - run: flutter doctor -v
+
       - run: flutter build apk
 
       - name: Install dependencies
