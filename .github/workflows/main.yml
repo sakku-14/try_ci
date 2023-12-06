@@ -22,7 +22,11 @@ jobs:
 
       - run: flutter doctor -v
 
-      - run: flutter build apk
+      - run: flutter doctor --android-licenses
+
+      - run: java --version
+
+      - run: flutter --scan build apk
 
       - name: Install dependencies
         run: flutter pub get
