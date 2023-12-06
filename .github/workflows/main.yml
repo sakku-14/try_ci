@@ -22,7 +22,8 @@ jobs:
 
       - run: flutter doctor -v
 
-      - run: flutter doctor --android-licenses
+#時間かかりすぎるので、コメントアウト
+#      - run: flutter doctor --android-licenses
 
       - run: java --version
 
