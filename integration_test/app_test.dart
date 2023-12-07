@@ -6,7 +6,7 @@ import 'package:integration_test/integration_test.dart';
 import 'package:try_ci/main.dart' as app;
 
 void main() {
-  final binding = IntegrationTestWidgetsFlutterBinding();
+  // final binding = IntegrationTestWidgetsFlutterBinding();
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
   group('end-to-end test', () {
@@ -17,7 +17,7 @@ void main() {
 
       // Verify the counter starts at 0.
       expect(find.text('0'), findsOneWidget);
-      await takeScreenshot(tester, binding, 'shot-1');
+      // await takeScreenshot(tester, binding, 'shot-1');
 
       // Finds the floating action button to tap on.
       final Finder fab = find.byTooltip('Increment');
@@ -27,7 +27,7 @@ void main() {
 
       // Trigger a frame.
       await tester.pumpAndSettle();
-      await takeScreenshot(tester, binding, 'shot-2');
+      // await takeScreenshot(tester, binding, 'shot-2');
 
       // Verify the counter increments by 1.
       expect(find.text('1'), findsOneWidget);
@@ -49,3 +49,12 @@ takeScreenshot(tester, binding, name) async {
 
   await binding.takeScreenshot(name);
 }
+
+/// スクリーンショットを取得する.
+// Future<void> _doScreenShot(
+//     FlutterDriver driver, String path, String fileName) async {
+//   await driver.waitUntilNoTransientCallbacks();
+//   final picture = await driver.screenshot();
+//   final file = File("$path/$fileName.png");
+//   await file.writeAsBytes(picture);
+// }
