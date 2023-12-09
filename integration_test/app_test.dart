@@ -7,7 +7,7 @@ import 'package:try_ci/main.dart' as app;
 
 void main() {
   // final binding = IntegrationTestWidgetsFlutterBinding();
-  IntegrationTestWidgetsFlutterBinding.ensureInitialized();
+  final binding = IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
   group('end-to-end test', () {
     testWidgets('tap on the floating action button, verify counter',
@@ -17,7 +17,7 @@ void main() {
 
       // Verify the counter starts at 0.
       expect(find.text('0'), findsOneWidget);
-      // await takeScreenshot(tester, binding, 'shot-1');
+      await takeScreenshot(tester, binding, 'shot-1');
 
       // Finds the floating action button to tap on.
       final Finder fab = find.byTooltip('Increment');
@@ -27,7 +27,7 @@ void main() {
 
       // Trigger a frame.
       await tester.pumpAndSettle();
-      // await takeScreenshot(tester, binding, 'shot-2');
+      await takeScreenshot(tester, binding, 'shot-2');
 
       // Verify the counter increments by 1.
       expect(find.text('1'), findsOneWidget);
