@@ -1,29 +1,21 @@
 import 'dart:io';
 
-import 'package:integration_test/integration_test_driver.dart';
+import 'package:integration_test/integration_test_driver_extended.dart';
 
 Future<void> main() async {
   try {
     await integrationDriver(
-      responseDataCallback: (Map<String, dynamic>? x) async {
-        if (x == null || x.isEmpty) return;
-
-        late Map<String, List<int>> nameByteDict;
-        if (x is Map<String, List<int>>) {
-          nameByteDict = x;
-        }
-
-        nameByteDict.forEach((key, value) async {
-          final File image =
-              await File('screenshots/$key.png').create(recursive: true);
-          image.writeAsBytesSync(value);
-        });
-        return;
+      onScreenshot: (String screenshotName, List<int> screenshotBytes,
+          [Map<String, Object?>? map]) async {
+        final image =
+            await File('integration_test/screenshots/$screenshotName.png')
+                .create(recursive: true);
+        image.writeAsBytesSync(screenshotBytes);
+        return true;
       },
     );
-  } catch (e) {
-    // if (kDebugMode) {
-    //   print('onScreenshot - error - $e');
-    // }
+  } on Exception catch (e) {
+    // ignore: avoid_print
+    print('Exception was thrown: $e');
   }
 }
