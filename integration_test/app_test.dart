@@ -10,15 +10,15 @@ void main() {
   /// Android端末であればスクリーンショットを撮る
   /// iPhone端末ではスクリーンショットが撮れない(例外が発生する)
   Future<void> takeScreenshot(String title) async {
-    if (Platform.isAndroid) {
+    // if (Platform.isAndroid) {
       await binding.takeScreenshot(title);
-    }
+    // }
   }
 
   Future<void> initialize() async {
-    if (Platform.isAndroid) {
+    // if (Platform.isAndroid) {
       await binding.convertFlutterSurfaceToImage();
-    }
+    // }
   }
 
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
