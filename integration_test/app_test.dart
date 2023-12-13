@@ -1,5 +1,3 @@
-// import 'dart:io';
-
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -8,6 +6,7 @@ import 'package:try_ci/main.dart' as app;
 
 void main() {
   final binding = IntegrationTestWidgetsFlutterBinding();
+  IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
   /// Android端末であればスクリーンショットを撮る
   /// iPhone端末ではスクリーンショットが撮れない(例外が発生する)
@@ -24,8 +23,6 @@ void main() {
 
     await binding.takeScreenshot(title);
   }
-
-  IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
   testWidgets('portrait', (WidgetTester tester) async {
     app.main();
