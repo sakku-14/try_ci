@@ -1,4 +1,4 @@
-import 'dart:io';
+// import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
@@ -11,13 +11,13 @@ void main() {
   /// iPhone端末ではスクリーンショットが撮れない(例外が発生する)
   Future<void> takeScreenshot(String title) async {
     // if (Platform.isAndroid) {
-      await binding.takeScreenshot(title);
+    await binding.takeScreenshot(title);
     // }
   }
 
   Future<void> initialize() async {
     // if (Platform.isAndroid) {
-      await binding.convertFlutterSurfaceToImage();
+    await binding.convertFlutterSurfaceToImage();
     // }
   }
 
