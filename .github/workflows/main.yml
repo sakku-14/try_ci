@@ -77,4 +77,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: Test result screenshots
-          path: screenshots/*.png
+          path: integration_test/screenshots/*.png
