@@ -61,8 +61,9 @@ jobs:
           api-level: ${{ matrix.api-level }}
           target: google_apis
           arch: "x86_64"
-          profile: Galaxy Nexus
-          cores: 8
+#          profile: Galaxy Nexus
+          profile: Nexus 10
+          cores: 4
           ram-size: 3072
           disable-animations: false
           script: flutter drive --driver=test_driver/main_test.dart --target=integration_test/app_test.dart
