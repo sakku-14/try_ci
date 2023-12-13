@@ -1,5 +1,7 @@
 // import 'dart:io';
 
+import 'dart:io';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:try_ci/main.dart' as app;
@@ -9,16 +11,18 @@ void main() {
 
   /// Android端末であればスクリーンショットを撮る
   /// iPhone端末ではスクリーンショットが撮れない(例外が発生する)
-  Future<void> takeScreenshot(String title) async {
-    // if (Platform.isAndroid) {
-    await binding.takeScreenshot(title);
-    // }
-  }
+  Future<void> takeScreenshot(WidgetTester tester, String title) async {
+    if (Platform.isAndroid) {
+      try {
+        await binding.convertFlutterSurfaceToImage();
+      } catch (e) {
+        // ignore: avoid_print
+        print("Take Screenshot exception $e");
+      }
+      await tester.pumpAndSettle();
+    }
 
-  Future<void> initialize() async {
-    // if (Platform.isAndroid) {
-    await binding.convertFlutterSurfaceToImage();
-    // }
+    await binding.takeScreenshot(title);
   }
 
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -26,13 +30,11 @@ void main() {
   testWidgets('portrait', (WidgetTester tester) async {
     app.main();
 
-    await initialize();
-
     // 起動画面
-    await tester.pump();
-    await takeScreenshot('00_screenshot');
+    await takeScreenshot(tester, '00_screenshot');
+    await tester.pumpAndSettle(const Duration(seconds: 5));
 
-    await tester.pumpAndSettle();
-    await takeScreenshot('01_screenshot');
+    await takeScreenshot(tester, '01_screenshot');
+    await tester.pumpAndSettle(const Duration(seconds: 5));
   });
 }
