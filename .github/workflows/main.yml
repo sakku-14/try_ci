@@ -63,7 +63,7 @@ jobs:
           arch: "x86_64"
           profile: Nexus 10
           cores: 4
-          ram-size: 2048
+          ram-size: 3072
           disable-animations: false
           script: flutter drive --driver=test_driver/main_test.dart --target=integration_test/app_test.dart
 
