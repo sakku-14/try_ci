@@ -54,8 +54,7 @@ jobs:
 #        with:
 #          token: ${{secrets.CODECOV_TOKEN}}
 #          file: coverage/lcov.info
-      - name: Check Device Name
-        run: avdmanager list device
+
       - name: Run integration tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
