@@ -21,7 +21,7 @@ jobs:
       # javaのバージョンを更新
       - uses: actions/setup-java@v4
         with:
-#          distribution: 'oracle' # See 'Supported distributions' for available options
+          distribution: 'oracle' # See 'Supported distributions' for available options
           java-version: '17'
 
       # Flutterの環境構築(cacheが存在すればそれを使用する)
