@@ -1,0 +1,82 @@
+name: Flutter Workflow
+
+on: [push, workflow_dispatch]
+# 同じブランチで新しいJobが来たら、今実行中のJobをキャンセルする
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+env:
+  # 使用しているFlutter SDKのバージョン
+  flutter_version: 3.16.0
+  
+jobs:
+  test:
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        api-level: [33]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # javaのバージョンを更新
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'oracle' # See 'Supported distributions' for available options
+          java-version: '17'
+
+      # Flutterの環境構築(cacheが存在すればそれを使用する)
+      - name: Create Flutter Environment
+        uses: subosito/flutter-action@v2.11.0
+        with:
+          flutter-version: ${{ env.flutter_version }}
+          cache: true
+          cache-key: flutter_environment-${{ runner.os }}-${{ env.flutter_version }}
+          channel: 'stable'
+
+#      - run: flutter doctor -v
+
+#時間かかりすぎるのでコメント
+#      - run: yes | flutter doctor --android-licenses
+
+#失敗するのでコメント
+#      - run: java --version
+
+      - run: flutter build apk -v
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Run unit tests
+        run: flutter test --coverage
+
+#      - name: Upload to code coverage
+#        uses: codecov/codecov-action@v1.2.2
+#        with:
+#          token: ${{secrets.CODECOV_TOKEN}}
+#          file: coverage/lcov.info
+
+      - name: Run integration tests
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: ${{ matrix.api-level }}
+          target: google_apis
+          arch: "x86_64"
+#          profile: Galaxy Nexus
+          profile: Nexus 10
+          cores: 4
+          ram-size: 3072
+          disable-animations: false
+          script: flutter drive --driver=test_driver/main_test.dart --target=integration_test/app_test.dart
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v3
+        with:
+          name: release-apk
+          path: build/app/outputs/apk/release/app-release.apk
+
+      - name: Upload Screenshoots
+        uses: actions/upload-artifact@v3
+        with:
+          name: Test result screenshots
+          path: integration_test/screenshots/*.png
