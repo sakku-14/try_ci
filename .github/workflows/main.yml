@@ -8,6 +8,7 @@ concurrency:
 env:
   # 使用しているFlutter SDKのバージョン
   flutter_version: 3.16.0
+  
 jobs:
   test:
     runs-on: macos-latest
